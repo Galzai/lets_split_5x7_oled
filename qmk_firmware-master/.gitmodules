@@ -1,0 +1,12 @@
+[submodule "lib/chibios"]
+	path = lib/chibios
+	url = https://github.com/qmk/ChibiOS
+[submodule "lib/chibios-contrib"]
+	path = lib/chibios-contrib
+	url = https://github.com/qmk/ChibiOS-Contrib
+[submodule "lib/ugfx"]
+	path = lib/ugfx
+	url = https://github.com/qmk/uGFX
+[submodule "lib/googletest"]
+	path = lib/googletest
+	url = https://github.com/google/googletest
