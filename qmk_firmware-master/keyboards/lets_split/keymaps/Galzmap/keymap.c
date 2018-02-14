@@ -22,13 +22,14 @@ extern keymap_config_t keymap_config;
 #define _QWERTY 0
 #define _LOWER 1
 #define _RAISE 2
+#define _ADJUST 16
 
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
   LOWER,
   RAISE,
-
+  ADJUST,
 
 };
 
@@ -53,17 +54,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------|      |------+------+------+------+------+------+------|
  * | Tab  | A    |   S  |   D  |   F  |   G  |   H  |      |   J  |   K  |   L  |   ;  |   '  |   _  |INS   |
  * |------+------+------+------+------+------+------|      |------+------+------+------+------+------+------|
- * | Shift| Z    |   X  |   C  |   V  |   B  |   N  |      |   M  |   ,  |   .  |   /  | prnt | Up   |del   |
+ * | Shift| Z    |   X  |   C  |   V  |   B  |   N  |      |   M  |   ,  |   .  |   /  | prnt | Up   |pscr  |
  * |------+------+------+------+------+------+------|      |------+------+------+------+------+------+------|
- * | Ctrl |Win   | alt  | Caps | Lower|Space |Space |      |enter |enter | raise| pscr |Left  | Down | Right|
+ * | Ctrl |Win   | alt  | Caps | Lower|Space |Space |      |RAISE |Del   | enter| enter|Left  | Down | Right|
  * `------------------------------------------------'      `------------------------------------------------'
  */
 [_QWERTY] = KEYMAP( \
-  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,   KC_BSPC,\
-  KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,  KC_BSLS, \
-  KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_PASTE, KC_INS, \
-  KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_COPY, KC_UP,    KC_DEL, \
-  KC_LCTRL,KC_LGUI, KC_LALT, KC_CAPS, LOWER,   KC_SPC,  KC_SPC,  KC_ENT,  KC_ENT,  RAISE,   KC_PSCR, KC_LEFT, KC_DOWN,  KC_UP \
+KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_DEL,    KC_EQL,    KC_MINS,  KC_0,    KC_9,   KC_8,    KC_7,\
+KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_BSLS,    KC_RBRC,  KC_LBRC,  KC_P,    KC_O,   KC_I,    KC_U, \
+KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_INS,     KC_PASTE, KC_QUOT,  KC_SCLN, KC_L,   KC_K,    KC_J, \
+KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_PSCR,    KC_UP,    KC_COPY,  KC_SLSH, KC_DOT, KC_COMM, KC_M, \
+KC_LCTRL,KC_LGUI, KC_LALT, KC_SPC , KC_SPC,  KC_CAPS, TG(1),   KC_RIGHT,   KC_DOWN,  KC_LEFT,  KC_ENT,  KC_ENT, KC_BSPC,  TG(2) \
 ),
 
 
@@ -90,6 +91,7 @@ KC_4,     KC_5,       KC_6,       KC_EQL,     KC_CIRC,    KC_LPRN,    KC_RPRN,  
 KC_1,     KC_2,       KC_3,       KC_ENT,     KC_NO,      KC_LBRC,    KC_RBRC,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,  KC_TRNS,   KC_TRNS, \
 KC_TRNS,  KC_0,       KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,  KC_TRNS,   KC_TRNS \
 ),
+
 /* Raise
  * ,------------------------------------------------.      ,------------------------------------------------.
  * |  F1  |  F3  |  F3  |  F4  |  F5  |  F6  |  V+  |      |  F7  |  F8  |  F9  | F10  | F11  | F12  |      |
@@ -104,6 +106,27 @@ KC_TRNS,  KC_0,       KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,  
  * `------------------------------------------------'      `------------------------------------------------'
  */
 [_RAISE] = KEYMAP( \
+KC_F1,    KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,      KC_VOLU,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,  KC_TRNS,   KC_TRNS,\
+KC_F7,    KC_F8,      KC_F9,      KC_F10,     KC_F11,     KC_F12,     KC_VOLD,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,  KC_TRNS,   KC_TRNS, \
+KC_PSCR,  KC_INS,     KC_PGUP,    KC_TRNS,    KC_MUTE,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,  KC_TRNS,   KC_TRNS, \
+KC_DEL,   KC_HOME,    KC_PGDN,    KC_TRNS,    KC_END,     KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,  KC_TRNS,   KC_TRNS, \
+KC_TRNS,  KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,  KC_TRNS,   KC_TRNS \
+),
+
+/* Adjust
+ * ,------------------------------------------------.      ,------------------------------------------------.
+ * |  F1  |  F3  |  F3  |  F4  |  F5  |  F6  |  V+  |      |  F7  |  F8  |  F9  | F10  | F11  | F12  |      |
+ * |------+------+------+------+------+------+------|      |------+------+------+------+------+------+------|
+ * |  F7  |  F8  |  F9  | F10  | F11  | F12  |  V-  |      |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------|      |------+------+------+------+------+------+------|
+ * | prnt |insert| PGUP |      |      |      | MUTE |      |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------|      |------+------+------+------+------+------+------|
+ * |delete| home | PGDN |      |      |      | END  |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------|      |------+------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      |      |      |      |      |      |      |      |      |
+ * `------------------------------------------------'      `------------------------------------------------'
+ */
+[_ADJUST] = KEYMAP( \
 KC_F1,    KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,      KC_VOLU,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,  KC_TRNS,   KC_TRNS,\
 KC_F7,    KC_F8,      KC_F9,      KC_F10,     KC_F11,     KC_F12,     KC_VOLD,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,  KC_TRNS,   KC_TRNS, \
 KC_PSCR,  KC_INS,     KC_PGUP,    KC_TRNS,    KC_MUTE,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,  KC_TRNS,   KC_TRNS, \
@@ -129,8 +152,49 @@ float music_scale[][2]     = SONG(MUSIC_SCALE_SOUND);
 float tone_goodbye[][2]    = SONG(GOODBYE_SOUND);
 #endif
 
+void persistant_default_layer_set(uint16_t default_layer) {
+	eeconfig_update_default_layer(default_layer);
+	default_layer_set(default_layer);
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+	switch (keycode) {
+		case QWERTY:
+		if (record->event.pressed) {
+			#ifdef AUDIO_ENABLE
+			PLAY_SONG(tone_qwerty);
+			#endif
+			persistant_default_layer_set(1UL<<_QWERTY);
+		}
+		return false;
+		break;
 
 
+
+		case LOWER:
+		if (record->event.pressed) {
+			layer_on(_LOWER);
+			update_tri_layer(_LOWER, _RAISE, _ADJUST);
+			} else {
+			layer_off(_LOWER);
+			update_tri_layer(_LOWER, _RAISE, _ADJUST);
+		}
+		return false;
+		break;
+		case RAISE:
+		if (record->event.pressed) {
+			layer_on(_RAISE);
+			update_tri_layer(_LOWER, _RAISE, _ADJUST);
+			} else {
+			layer_off(_RAISE);
+			update_tri_layer(_LOWER, _RAISE, _ADJUST);
+		}
+		return false;
+		break;
+
+	}
+	return true;
+}
 
 
 
@@ -158,11 +222,11 @@ void matrix_master_OLED_init (void) {
 
 void matrix_scan_user(void) {
      iota_gfx_task();  // this is what updates the display continuously
-	 if(cleanmatrix<1301){
+	 if(cleanmatrix<2501){
 	 cleanmatrix++;
 		 
 	 }
-	 if(cleanmatrix==1300){
+	 if(cleanmatrix==2500){
 		iota_gfx_init();   // turns on the display
 
 		 
@@ -230,14 +294,9 @@ void matrix_update(struct CharacterMatrix *dest,
 
 //assign the right code to your layers for OLED display
 #define L_BASE 0
-#define L_LOWER 1
-#define L_RAISE 2
-#define L_FNLAYER 64
-#define L_NUMLAY 128
-#define L_NLOWER 136
-#define L_NFNLAYER 192
-#define L_MOUSECURSOR 256
-#define L_ADJUST 65560
+#define L_LOWER 2
+#define L_RAISE 4
+#define L_ADJUST 6
 
 void iota_gfx_task_user(void) {
 #if DEBUG_TO_SCREEN
